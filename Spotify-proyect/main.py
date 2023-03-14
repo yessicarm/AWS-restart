@@ -88,7 +88,13 @@ my_list={}
 
 #Funcion para agregar a tu lista las canciones    
 def add_song_list(top_ten):      
-    res= input("Do you want add a new song in your list : Y / N  :")                
+    res= input("Do you want add a new song in your list : Y / N  :") 
+    if res.upper() == 'N' and len(my_list)>=2:
+        print("List complete")       
+        return my_list  
+    if res.upper() == 'N' and len(my_list)<2:
+        print("You need to add more music in your playlist")
+        add_song_list(top_ten)             
     if res.upper() == 'Y':
         number_of_song= input("Enter the song NUMBER that you want add in your list: ")
         try:
@@ -101,19 +107,12 @@ def add_song_list(top_ten):
             add_song_list(top_ten)
         except:
             print("Enter no valid, try again")
-            add_song_list(top_ten)            
-    if res.upper() == 'N' and len(my_list)<2:
-        print("You need to add more music in your playlist")
-        add_song_list(top_ten)
-    if res.upper() != 'N' and res.upper() != 'Y':
+            add_song_list(top_ten)  
+    elif res.upper() != 'N' and res.upper() != 'Y':
         print("Enter no valid")
-        add_song_list(top_ten)
-    else:
-        res.upper() == 'N' and len(my_list)>=2       
-        return my_list
-    
+        add_song_list(top_ten)    
         
-       
+      
 add_song_list(top_ten)
 songs_time_list=[]
 
@@ -133,7 +132,6 @@ print(' Your playlist is : ')
 total_time=  total_time_of_list(my_list, songs_time_list)
 #suma el tiempo de la playlist y la imprime
 print(f'Your playlist duration is:  {sum(total_time)} ')  
-         
 
         
         
